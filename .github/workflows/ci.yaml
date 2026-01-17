@@ -10,28 +10,28 @@ jobs:
   build-locally:
     runs-on: self-hosted  # <--- vital! Use your Minikube runner
 
-steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    steps:
+	  - name: Checkout
+	    uses: actions/checkout@v3
 
-      - name: Debug - Show Values File
-        run: cat environments/test/values.yaml
+	  - name: Debug - Show Values File
+	    run: cat environments/test/values.yaml
 
-      - name: Get Version
-        id: version
-        run: |
-          # Try to find the tag, or default to 'latest' if missing
-          TAG=$(grep 'tag:' environments/test/values.yaml | awk '{print $2}' | tr -d '"' | tr -d '[:space:]')
-          
-          if [ -z "$TAG" ]; then
-            echo "Warning: Could not extract tag. Defaulting to 'latest'."
-            TAG="latest"
-          fi
-          
-          echo "Building version: $TAG"
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+	  - name: Get Version
+	    id: version
+	    run: |
+	      # Try to find the tag, or default to 'latest' if missing
+	      TAG=$(grep 'tag:' environments/test/values.yaml | awk '{print $2}' | tr -d '"' | tr -d '[:space:]')
+	      
+	      if [ -z "$TAG" ]; then
+		echo "Warning: Could not extract tag. Defaulting to 'latest'."
+		TAG="latest"
+	      fi
+	      
+	      echo "Building version: $TAG"
+	      echo "tag=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Build Image
-        run: |
-          cd app
-          docker build -t cicdtest-app:${{ steps.version.outputs.tag }} .
+	  - name: Build Image
+	    run: |
+	      cd app
+	      docker build -t cicdtest-app:${{ steps.version.outputs.tag }} .
