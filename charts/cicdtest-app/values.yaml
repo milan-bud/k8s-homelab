@@ -1,6 +1,6 @@
 image:
   repository: cicdtest-app
-  tag: latest
+  tag: v1.0.0 
   pullPolicy: IfNotPresent
 
 service:
