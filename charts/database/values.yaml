@@ -1,0 +1,13 @@
+image:
+  repository: bitnami/postgresql
+  tag: latest
+  pullPolicy: IfNotPresent
+
+auth:
+  username: "admin"
+  database: "test"
+  # In production, use Secrets! For lab, this is acceptable.
+  password: "admin" 
+
+persistence:
+  size: 1Gi
