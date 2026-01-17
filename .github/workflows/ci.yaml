@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    paths:
+      - 'app/**'          # Run when source code changes
+      - 'environments/**' # Run when we update the version tag
+
+jobs:
+  build-locally:
+    runs-on: self-hosted  # <--- vital! Use your Minikube runner
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get Version
+        id: version
+        # Extracts "v1.0" from environments/test/values.yaml
+        run: |
+          TAG=$(grep 'tag:' environments/test/values.yaml | awk '{print $2}' | tr -d '"')
+          echo "Building version: $TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Build Image
+        run: |
+          cd app
+          # Build directly into Minikube's Docker Daemon
+          docker build -t simple-app:${{ steps.version.outputs.tag }} .
