@@ -25,4 +25,4 @@ jobs:
         run: |
           cd app
           # Build directly into Minikube's Docker Daemon
-          docker build -t simple-app:${{ steps.version.outputs.tag }} .
+          docker build -t cicdtest-app:${{ steps.version.outputs.tag }} .
