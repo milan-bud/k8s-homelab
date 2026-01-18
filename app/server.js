@@ -1,23 +1,35 @@
 const express = require('express');
+const { Pool } = require('pg');
 const app = express();
 const port = 3000;
 
-// This version number helps us visualize the CI/CD update
-const version = "V1.0"; 
-
-app.get('/', (req, res) => {
-  res.send(`
-    <h1>DevOps Lab - ${version}</h1>
-    <p>Running in Kubernetes!</p>
-    <p>Environment: ${process.env.NODE_ENV || 'development'}</p>
-  `);
+// Connect using Environment Variables (Best Practice)
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: 5432,
 });
 
-app.get('/health', (req, res) => res.status(200).send('OK'));
+app.get('/', async (req, res) => {
+  try {
+    // Query the database
+    const result = await pool.query('SELECT * FROM quotes');
+
+    let html = `<h1>DevOps Lab - Database Connected!</h1>`;
+    html += `<ul>`;
+    result.rows.forEach(row => {
+       html += `<li>${row.text}</li>`;
+    });
+    html += `</ul>`;
+
+    res.send(html);
+  } catch (err) {
+    res.send(`<h1>Error</h1><p>${err.message}</p>`);
+  }
+});
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
-// Initial Build Trigger
-// Trigger Fix
-// Trigger Fix 2
