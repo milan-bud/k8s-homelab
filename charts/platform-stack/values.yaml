@@ -1,0 +1,21 @@
+redis:
+  # In v25+, the "architecture" parameter is critical. 
+  architecture: standalone
+
+  auth:
+    enabled: false 
+
+  master:
+    persistence:
+      enabled: false 
+    # Optional: Resource limits to keep your Multipass VM healthy
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+keda:
+  watchNamespace: "" 
+  
+  crds:
+    install: true

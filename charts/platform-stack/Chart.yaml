@@ -1,0 +1,15 @@
+apiVersion: v2
+name: platform-stack
+description: Umbrella chart
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: redis
+    # Using ~ to get critical security patches without breaking changes
+    version: "~25.3.0" 
+    repository: https://charts.bitnami.com/bitnami
+  - name: keda
+    # Using ^ to allow new scalers/features within the v2 lifecycle
+    version: "^2.19.0" 
+    repository: https://kedacore.github.io/charts
