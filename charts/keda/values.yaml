@@ -1,0 +1,6 @@
+keda:
+  namespaceOverride: "keda" 
+  watchNamespace: "" 
+  
+  crds:
+    install: true

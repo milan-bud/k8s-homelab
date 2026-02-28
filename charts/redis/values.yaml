@@ -1,6 +1,7 @@
 redis:
   # In v25+, the "architecture" parameter is critical. 
   architecture: standalone
+  namespaceOverride: "redis"
 
   auth:
     enabled: false 
@@ -13,9 +14,3 @@ redis:
       requests:
         cpu: 100m
         memory: 128Mi
-
-keda:
-  watchNamespace: "" 
-  
-  crds:
-    install: true

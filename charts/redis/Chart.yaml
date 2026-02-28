@@ -1,0 +1,10 @@
+apiVersion: v2
+name: redis 
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: redis
+    # Using ~ to get critical security patches without breaking changes
+    version: "~25.3.0" 
+    repository: https://charts.bitnami.com/bitnami
