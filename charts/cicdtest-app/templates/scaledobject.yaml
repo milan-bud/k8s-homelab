@@ -1,11 +1,11 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: cicdtest-app-scaler
-  namespace: default 
+  name: {{ .Release.Name }}-scaler
+  namespace: test 
 spec:
   scaleTargetRef:
-    name: cicdtest-app
+    name: {{ .Release.Name }} 
   pollingInterval: 5
   cooldownPeriod:  30
   minReplicaCount: 0  # It should scale to zero if the list is empty
