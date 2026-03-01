@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cicd-runner
+description: A GitHub Self-Hosted Runner for Minikube
+type: application
+version: 0.1.0
+appVersion: "latest"

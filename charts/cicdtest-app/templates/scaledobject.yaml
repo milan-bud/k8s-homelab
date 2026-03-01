@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: cicdtest-app-scaler
+  namespace: default 
+spec:
+  scaleTargetRef:
+    name: cicdtest-app
+  pollingInterval: 5
+  cooldownPeriod:  30
+  minReplicaCount: 0  # It should scale to zero if the list is empty
+  maxReplicaCount: 5
+  triggers:
+  - type: redis
+    metadata:
+      # Pattern: <service-name>.<namespace>.svc.cluster.local:6379
+      address: redis-master.redis.svc.cluster.local:6379
+      listName: "task_queue"
+      listLength: "5"
