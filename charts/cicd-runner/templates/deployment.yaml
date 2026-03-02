@@ -22,9 +22,9 @@ spec:
               name: cicd-runner-secret
               key: ACCESS_TOKEN
         - name: REPO_URL
-          value: {{ .Values.repoUrl | quote }}
+          value: {{ .Values.github.repoUrl | quote }} 
         - name: RUNNER_WORKDIR
-          value: {{ .Values.runnerWorkdir | quote }}
+          value: {{ .Values.github.runnerWorkdir | quote }}
         volumeMounts:
         - name: docker-sock
           mountPath: /var/run/docker.sock
