@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: runner
-        image: {{ .Values.image }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" 
         env:
         - name: ACCESS_TOKEN
           valueFrom:
