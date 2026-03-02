@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
 
 github:
-  repoUrl: "https://github.com/milan-bud/k8s-homelab"
+  repoUrl: https://github.com/milan-bud/k8s-homelab
   runnerWorkdir: "/tmp/runner"
 
 resources:
