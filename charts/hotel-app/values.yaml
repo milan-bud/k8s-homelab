@@ -4,11 +4,10 @@
 hotel_app:
   replicaCount: 1
   image: "hotel-app:latest"
+  ingress:
+    host: "test.lab.local"
   database:
-    host: "localhost"
-    port: 5432
-    user: "postgres"
-    dbName: "postgres"
+    host: "postgres.test.svc.cluster.local"
     secretName: "hotel-db-secret"
   redis:
     host: "localhost"
