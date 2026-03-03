@@ -2,7 +2,6 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: {{ .Release.Name }}-scaler
-  namespace: {{ .Release.Namespace }} 'test' namespace
 spec:
   scaleTargetRef:
     name: {{ .Release.Name }}
