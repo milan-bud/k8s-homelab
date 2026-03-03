@@ -2,9 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }} 'test' namespace
+  labels:
+    app: hotel-app
 spec:
   replicas: {{ .Values.hotel_app.replicaCount }}
+  selector:
+    matchLabels:
+      app: hotel-app 
   template:
+    metadata:
+      labels:
+        app: hotel-app 
     spec:
       containers:
         - name: hotel-app
@@ -12,7 +21,6 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            # Pulling all keys from Secret
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -28,12 +36,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.hotel_app.database.secretName }}
                   key: dbname
-            
             - name: DB_HOST
               value: {{ .Values.hotel_app.database.host | quote }}
-            
             - name: DATABASE_URL
               value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)"
-            
             - name: REDIS_URL
               value: "redis://{{ .Values.hotel_app.redis.host }}:{{ .Values.hotel_app.redis.port }}"
