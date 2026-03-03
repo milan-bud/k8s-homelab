@@ -1,19 +1,18 @@
-# Default values for hotel-app.
-# These will be overridden by environments/test/values.yaml
-
 hotel_app:
   replicaCount: 1
-  repository: hotel-app
+  image:
+    repository: hotel-app
     tag: v1.0.0
     pullPolicy: IfNotPresent
-  ingress:
-    host: "test.lab.local"
+  
   database:
     host: "postgres.test.svc.cluster.local"
     secretName: "hotel-db-secret"
+  
   redis:
-    host: "localhost"
+    host: "redis-service.test.svc.cluster.local"
     port: 6379
+
   keda:
     minReplicas: 0
     maxReplicas: 2
