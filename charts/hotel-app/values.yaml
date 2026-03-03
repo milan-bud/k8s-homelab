@@ -1,0 +1,19 @@
+# Default values for hotel-app.
+# These will be overridden by environments/test/values.yaml
+
+hotel_app:
+  replicaCount: 1
+  image: "hotel-app:latest"
+  database:
+    host: "localhost"
+    port: 5432
+    user: "postgres"
+    dbName: "postgres"
+    secretName: "hotel-db-secret"
+  redis:
+    host: "localhost"
+    port: 6379
+  keda:
+    minReplicas: 0
+    maxReplicas: 2
+    sessionsPerPod: "10"
