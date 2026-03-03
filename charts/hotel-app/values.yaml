@@ -2,7 +2,7 @@ hotel_app:
   replicaCount: 1
   image:
     repository: hotel-app
-    tag: v1.0.0
+    tag: v2.0.0
     pullPolicy: IfNotPresent
 
   ingress:
