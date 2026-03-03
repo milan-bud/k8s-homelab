@@ -66,6 +66,22 @@ app.post('/api/invoices', async (req, res) => {
     }
 });
 
+app.use(express.json()); // Allows the app to read JSON from the browser
+
+app.post('/api/bookings', async (req, res) => {
+  try {
+    const { room_id, guest_name } = req.body;
+    await pool.query(
+      'INSERT INTO bookings (room_id, guest_name) VALUES ($1, $2)',
+      [room_id, guest_name]
+    );
+    res.status(201).json({ message: "Booking Created!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Database error: " + err.message });
+  }
+});
+
 // --- K8S HEALTH CHECK ---
 app.get('/health', (req, res) => res.status(200).send('OK'));
 
