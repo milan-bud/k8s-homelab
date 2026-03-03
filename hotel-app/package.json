@@ -1,0 +1,17 @@
+{
+  "name": "hotel-app",
+  "version": "1.0.0",
+  "description": "Reception & CRM Management Tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "connect-redis": "^7.1.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.11.3",
+    "redis": "^4.6.10"
+  }
+}

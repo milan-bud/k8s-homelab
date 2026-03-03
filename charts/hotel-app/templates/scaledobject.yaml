@@ -1,0 +1,15 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ .Release.Name }}-scaler
+spec:
+  scaleTargetRef:
+    name: {{ .Release.Name }}
+  minReplicaCount: {{ .Values.hotel_app.keda.minReplicas }}
+  maxReplicaCount: {{ .Values.hotel_app.keda.maxReplicas }}
+  triggers:
+    - type: redis
+      metadata:
+        addressFromEnv: REDIS_URL
+        listName: "sess:*" 
+        listLength: {{ .Values.hotel_app.keda.sessionsPerPod | quote }}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.hotel_app.replicaCount }}
+  template:
+    spec:
+      containers:
+        - name: hotel-app
+          image: {{ .Values.hotel_app.image }}
+          ports:
+            - containerPort: 3000
+          env:
+            # Pulling all keys from Secret
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.hotel_app.database.secretName }}
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.hotel_app.database.secretName }}
+                  key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.hotel_app.database.secretName }}
+                  key: dbname
+            
+            - name: DB_HOST
+              value: {{ .Values.hotel_app.database.host | quote }}
+            
+            - name: DATABASE_URL
+              value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):5432/$(DB_NAME)"
+            
+            - name: REDIS_URL
+              value: "redis://{{ .Values.hotel_app.redis.host }}:{{ .Values.hotel_app.redis.port }}"
