@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: hotel-app
-          image: {{ .Values.hotel_app.image }}
+          image: "{{ .Values.hotel_app.image.repository }}:{{ .Values.hotel_app.image.tag }}"
+          imagePullPolicy: {{ .Values.hotel_app.image.pullPolicy | default "IfNotPresent" }}
           ports:
             - containerPort: 3000
           env:

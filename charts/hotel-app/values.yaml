@@ -3,7 +3,9 @@
 
 hotel_app:
   replicaCount: 1
-  image: "hotel-app:latest"
+  repository: hotel-app
+    tag: v1.0.0
+    pullPolicy: IfNotPresent
   ingress:
     host: "test.lab.local"
   database:
