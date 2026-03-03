@@ -13,7 +13,7 @@ hotel_app:
     secretName: "hotel-db-secret"
   
   redis:
-    host: "redis-service.test.svc.cluster.local"
+    host: "redis-service.redis.svc.cluster.local"
     port: 6379
 
   keda:
