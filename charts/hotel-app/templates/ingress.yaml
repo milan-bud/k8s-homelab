@@ -4,13 +4,14 @@ metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
     # Use the nested value, with a fallback string to prevent the 'nil pointer' error
     - host: {{ .Values.hotel_app.ingress.host | default "test.lab.local" }}
       http:
         paths:
-          - path: /hotel
+          - path: /
             pathType: Prefix
             backend:
               service:
