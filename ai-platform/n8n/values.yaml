@@ -1,10 +1,10 @@
 n8n:
   extraEnv:
-    - name: GENERIC_TIMEZONE
+    GENERIC_TIMEZONE:
       value: "Europe/Zagreb"
-    - name: WEBHOOK_URL
-      value: "http://localhost:5678/"
-    - name: N8N_SECURE_COOKIE
+    WEBHOOK_URL:
+      value: "http://10.218.241.217:5678/"
+    N8N_SECURE_COOKIE:
       value: "false" 
     
   persistence:
