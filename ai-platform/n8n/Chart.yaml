@@ -3,5 +3,5 @@ name: n8n
 version: 1.0.0
 dependencies:
   - name: n8n
-    version: 0.20.1 # Latest community chart
-    repository: https://cetic.github.io/helm-charts
+    version: 0.100.0 # Latest stable 8gears chart
+    repository: oci://8gears.container-registry.com/library
