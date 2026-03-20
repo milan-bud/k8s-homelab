@@ -1,0 +1,19 @@
+n8n:
+  port: 5678
+  env:
+    - name: GENERIC_TIMEZONE
+      value: "Europe/Zagreb"
+    - name: WEBHOOK_URL
+      value: "http://localhost:5678/"
+    
+persistence:
+  enabled: true
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+serviceAccount:
+  create: false
+  name: "n8n-sa" 
+
+# apply the n8n-rbac.yaml manually or via a separate sync 
+# to ensure the SA exists before the deployment tries to mount it.

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: n8n-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: n8n-reader
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["pods", "pods/log", "events", "deployments", "services"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: n8n-reader-binding
+subjects:
+- kind: ServiceAccount
+  name: n8n-sa
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: n8n-reader
+  apiGroup: rbac.authorization.k8s.io
