@@ -4,6 +4,8 @@ n8n:
       value: "Europe/Zagreb"
     - name: WEBHOOK_URL
       value: "http://localhost:5678/"
+    - name: N8N_SECURE_COOKIE
+      value: "false" 
     
   persistence:
     enabled: true
